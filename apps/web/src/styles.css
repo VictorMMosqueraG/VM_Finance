@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+
+/* Tokens estilo iOS */
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  --color-ios-bg: #f2f2f7;
+  --color-ios-card: #ffffff;
+  --color-ios-blue: #007aff;
+  --color-ios-green: #34c759;
+  --color-ios-amber: #ff9f0a;
+  --color-ios-red: #ff3b30;
+}
+
+html,
+body {
+  @apply bg-ios-bg text-neutral-900 antialiased;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Safe areas para Dynamic Island y barra inferior del iPhone */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

@@ -1,0 +1,42 @@
+<main class="safe-top safe-bottom mx-auto flex min-h-dvh max-w-md flex-col gap-4 px-4 py-6">
+  <header>
+    <p class="text-sm font-medium text-neutral-500">Monorepo listo</p>
+    <h1 class="text-3xl font-bold tracking-tight">{{ title() }}</h1>
+  </header>
+
+  <section class="rounded-2xl bg-ios-card p-4 shadow-sm">
+    <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-neutral-500">API</h2>
+    @let state = api();
+    @if (state.kind === 'ok') {
+      <p class="font-semibold text-ios-green" data-testid="api-status">● API conectada</p>
+      <p class="text-sm text-neutral-500">
+        Base de datos: <span class="font-medium">{{ state.data.database }}</span> · v{{
+          state.data.version
+        }}
+      </p>
+    } @else if (state.kind === 'error') {
+      <p class="font-semibold text-ios-red" data-testid="api-status">● API no disponible</p>
+      <p class="text-sm text-neutral-500">
+        Ejecuta <code>npm run dev</code> en la raíz del repositorio.
+      </p>
+    } @else {
+      <p class="text-neutral-500">Conectando con la API…</p>
+    }
+  </section>
+
+  <section class="grid grid-cols-2 gap-3">
+    <article class="rounded-2xl bg-ios-card p-4 shadow-sm">
+      <p class="text-xs text-neutral-500">🟢 Disponible</p>
+      <p class="text-xl font-bold">{{ formatCop(kpis.available) }}</p>
+    </article>
+    <article class="rounded-2xl bg-ios-card p-4 shadow-sm">
+      <p class="text-xs text-neutral-500">💰 Ahorro neto</p>
+      <p class="text-xl font-bold">{{ formatCop(kpis.netSavings) }}</p>
+    </article>
+  </section>
+  <p class="text-center text-xs text-neutral-400">
+    KPIs de ejemplo (septiembre 2026) calculados con &#64;vm-finance/shared
+  </p>
+</main>
+
+<router-outlet />

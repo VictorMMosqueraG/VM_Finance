@@ -1,0 +1,34 @@
+{
+  "name": "vm-finance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "VM-Finance — PWA de finanzas personales multi-usuario (NestJS + Angular)",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0",
+    "npm": ">=10"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run build -w @vm-finance/shared && concurrently -k -n shared,api,web -c gray,magenta,cyan \"npm run dev -w @vm-finance/shared\" \"npm run dev -w @vm-finance/api\" \"npm run dev -w @vm-finance/web\"",
+    "dev:api": "npm run build -w @vm-finance/shared && npm run dev -w @vm-finance/api",
+    "dev:web": "npm run build -w @vm-finance/shared && npm run dev -w @vm-finance/web",
+    "build": "npm run build -w @vm-finance/shared && npm run build -w @vm-finance/api && npm run build -w @vm-finance/web",
+    "test": "npm run build -w @vm-finance/shared && npm run test --workspaces --if-present",
+    "typecheck": "npm run build -w @vm-finance/shared && npm run typecheck --workspaces --if-present",
+    "format": "prettier --write .",
+    "db:up": "docker compose up -d db",
+    "db:down": "docker compose down",
+    "db:generate": "npm run prisma:generate -w @vm-finance/api",
+    "db:migrate": "npm run prisma:migrate -w @vm-finance/api",
+    "db:studio": "npm run prisma:studio -w @vm-finance/api"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2"
+  }
+}
