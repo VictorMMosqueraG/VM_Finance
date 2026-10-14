@@ -1,5 +1,5 @@
 {
-  "name": "@vm-finance/api",
+  "name": "@vm-finance/backend",
   "version": "0.1.0",
   "description": "API REST de VM-Finance (NestJS + Prisma + PostgreSQL)",
   "author": "Víctor Mosquera",

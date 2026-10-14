@@ -9,7 +9,7 @@ coverage/
 .angular/
 
 # Prisma (cliente generado)
-apps/api/src/generated/
+apps/backend/src/generated/
 
 # Variables de entorno (solo se versiona .env.example)
 .env

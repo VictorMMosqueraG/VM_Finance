@@ -30,7 +30,7 @@ Total aproximado: **26–27 días de trabajo** (≈ 5–6 semanas a ritmo de med
 
 ## Fase 0 — Monorepo base ✅
 
-- npm workspaces: `apps/api`, `apps/web`, `packages/shared`.
+- npm workspaces: `apps/backend`, `apps/frontend`, `packages/shared`.
 - `packages/shared` con `calculateMonthlyKpis`, `formatCop`, enums y contratos; prueba que cuadra septiembre 2026.
 - API NestJS con `/api/health`, Prisma 7 configurado (adaptador `pg`, cliente ESM).
 - Web Angular 22 con Tailwind 4, PWA (manifest + service worker), meta tags iOS y proxy `/api → :3000`.
@@ -38,7 +38,7 @@ Total aproximado: **26–27 días de trabajo** (≈ 5–6 semanas a ritmo de med
 
 ## Fase 1 — Modelo de datos y seed
 
-**API — `apps/api/prisma/schema.prisma`**
+**API — `apps/backend/prisma/schema.prisma`**
 
 - [ ] Modelos: `User`, `RefreshToken`, `InviteCode`, `UserSettings`, `IncomeSource`, `MonthlyBudget`, `MonthlyIncome`, `Category`, `Transaction`, `PaymentReminder`, `PaymentInstance`, `ReminderLog`, `PushSubscription`, `DebtTracker`.
 - [ ] Montos como `Int` (pesos). `period` como `String` `YYYY-MM` o par `year/month` con índice `(userId, period)`.
@@ -47,7 +47,7 @@ Total aproximado: **26–27 días de trabajo** (≈ 5–6 semanas a ritmo de med
 - [ ] `onDelete: Cascade` desde `User` para poder borrar cuentas.
 - [ ] Primera migración: `npm run db:migrate -- --name init`.
 
-**Seed — `apps/api/prisma/seed.ts`**
+**Seed — `apps/backend/prisma/seed.ts`**
 
 - [ ] Usuario principal Víctor Mosquera con contraseña de desarrollo.
 - [ ] Fuentes de ingreso: Sueldo Carga Ya (100 % ahorro) y Sueldo Koral (30 %).
@@ -153,8 +153,8 @@ Total aproximado: **26–27 días de trabajo** (≈ 5–6 semanas a ritmo de med
 
 - [ ] Repositorio en GitHub (privado).
 - [ ] **Neon**: proyecto `vm-finance`, región `us-east`; `DATABASE_URL` (pooler) y `DIRECT_URL` (directa).
-- [ ] **Render** (Web Service, Free): raíz del repo; build `npm ci && npm run build -w @vm-finance/shared && npm run build -w @vm-finance/api`; start `npm run prisma:deploy -w @vm-finance/api && npm run start:prod -w @vm-finance/api`; variables de entorno.
-- [ ] **Cloudflare Pages**: build `npm run build -w @vm-finance/shared && npm run build -w @vm-finance/web`; salida `apps/web/dist/web/browser`; `_redirects` con `/* /index.html 200`; variable con la URL de la API (archivo `environment` o `config.json` en runtime).
+- [ ] **Render** (Web Service, Free): raíz del repo; build `npm ci && npm run build -w @vm-finance/shared && npm run build -w @vm-finance/backend`; start `npm run prisma:deploy -w @vm-finance/backend && npm run start:prod -w @vm-finance/backend`; variables de entorno.
+- [ ] **Cloudflare Pages**: build `npm run build -w @vm-finance/shared && npm run build -w @vm-finance/frontend`; salida `apps/frontend/dist/frontend/browser`; `_redirects` con `/* /index.html 200`; variable con la URL de la API (archivo `environment` o `config.json` en runtime).
 - [ ] GitHub Actions: secretos `API_URL` y `CRON_SECRET` para el workflow de recordatorios.
 - [ ] En el iPhone: Safari → Compartir → Agregar a pantalla de inicio → Perfil → Activar notificaciones.
 
@@ -174,7 +174,7 @@ Total aproximado: **26–27 días de trabajo** (≈ 5–6 semanas a ritmo de med
 
 1. Rama `feat/fase-N-nombre` → PR a `main` → el CI debe pasar.
 2. Primero la API con sus pruebas, luego la pantalla.
-3. Las reglas de dinero se escriben y prueban en `packages/shared`, nunca duplicadas en api o web.
+3. Las reglas de dinero se escriben y prueban en `packages/shared`, nunca duplicadas en backend o frontend.
 4. Al cerrar la fase, marca las casillas de este documento.
 
 ## Riesgos y cómo mitigarlos

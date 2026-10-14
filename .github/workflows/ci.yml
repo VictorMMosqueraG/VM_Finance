@@ -17,5 +17,5 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
-      - run: npm run test:e2e -w @vm-finance/api
+      - run: npm run test:e2e -w @vm-finance/backend
       - run: npm run build

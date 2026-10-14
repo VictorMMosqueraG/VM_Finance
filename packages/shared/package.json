@@ -2,7 +2,7 @@
   "name": "@vm-finance/shared",
   "version": "0.1.0",
   "private": true,
-  "description": "Tipos, contratos de API y reglas financieras compartidas entre api y web",
+  "description": "Tipos, contratos de API y reglas financieras compartidas entre backend y frontend",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

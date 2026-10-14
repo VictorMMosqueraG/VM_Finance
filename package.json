@@ -13,18 +13,18 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run build -w @vm-finance/shared && concurrently -k -n shared,api,web -c gray,magenta,cyan \"npm run dev -w @vm-finance/shared\" \"npm run dev -w @vm-finance/api\" \"npm run dev -w @vm-finance/web\"",
-    "dev:api": "npm run build -w @vm-finance/shared && npm run dev -w @vm-finance/api",
-    "dev:web": "npm run build -w @vm-finance/shared && npm run dev -w @vm-finance/web",
-    "build": "npm run build -w @vm-finance/shared && npm run build -w @vm-finance/api && npm run build -w @vm-finance/web",
+    "dev": "npm run build -w @vm-finance/shared && concurrently -k -n shared,backend,frontend -c gray,magenta,cyan \"npm run dev -w @vm-finance/shared\" \"npm run dev -w @vm-finance/backend\" \"npm run dev -w @vm-finance/frontend\"",
+    "dev:backend": "npm run build -w @vm-finance/shared && npm run dev -w @vm-finance/backend",
+    "dev:frontend": "npm run build -w @vm-finance/shared && npm run dev -w @vm-finance/frontend",
+    "build": "npm run build -w @vm-finance/shared && npm run build -w @vm-finance/backend && npm run build -w @vm-finance/frontend",
     "test": "npm run build -w @vm-finance/shared && npm run test --workspaces --if-present",
     "typecheck": "npm run build -w @vm-finance/shared && npm run typecheck --workspaces --if-present",
     "format": "prettier --write .",
     "db:up": "docker compose up -d db",
     "db:down": "docker compose down",
-    "db:generate": "npm run prisma:generate -w @vm-finance/api",
-    "db:migrate": "npm run prisma:migrate -w @vm-finance/api",
-    "db:studio": "npm run prisma:studio -w @vm-finance/api"
+    "db:generate": "npm run prisma:generate -w @vm-finance/backend",
+    "db:migrate": "npm run prisma:migrate -w @vm-finance/backend",
+    "db:studio": "npm run prisma:studio -w @vm-finance/backend"
   },
   "devDependencies": {
     "concurrently": "^10.0.6",
