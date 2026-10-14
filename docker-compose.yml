@@ -1,21 +1,23 @@
-# Postgres local para desarrollo (en producción se usa Neon).
-# Uso: npm run db:up
+name: vm-finance
+
 services:
   db:
     image: postgres:17-alpine
     container_name: vm-finance-db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: vmfinance
-      POSTGRES_PASSWORD: vmfinance
-      POSTGRES_DB: vmfinance
+      POSTGRES_USER: ${POSTGRES_USER:-vmfinance}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vmfinance}
+      POSTGRES_DB: ${POSTGRES_DB:-vmfinance}
       TZ: America/Bogota
+      PGTZ: America/Bogota
     ports:
-      - '5432:5432'
+      - '${POSTGRES_PORT:-5432}:5432'
     volumes:
       - vmfinance-pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U vmfinance -d vmfinance']
+      # $$ = variable del contenedor (no la sustituye compose).
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
       interval: 5s
       timeout: 3s
       retries: 10

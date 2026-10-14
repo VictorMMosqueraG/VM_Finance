@@ -20,11 +20,9 @@
     "test": "npm run build -w @vm-finance/shared && npm run test --workspaces --if-present",
     "typecheck": "npm run build -w @vm-finance/shared && npm run typecheck --workspaces --if-present",
     "format": "prettier --write .",
-    "db:up": "docker compose up -d db",
-    "db:down": "docker compose down",
-    "db:generate": "npm run prisma:generate -w @vm-finance/backend",
-    "db:migrate": "npm run prisma:migrate -w @vm-finance/backend",
-    "db:studio": "npm run prisma:studio -w @vm-finance/backend",
+    "db:up": "docker compose --env-file apps/backend/.env up -d --wait db",
+    "db:down": "docker compose --env-file apps/backend/.env down",
+    "db:reset": "docker compose --env-file apps/backend/.env down -v",
     "prepare": "git config core.hooksPath .githooks && git config commit.template .gitmessage || true"
   },
   "devDependencies": {
