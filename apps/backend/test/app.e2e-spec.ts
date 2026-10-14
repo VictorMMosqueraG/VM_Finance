@@ -23,7 +23,8 @@ describe('Health (e2e)', () => {
       .get(`/${API_PREFIX}/health`)
       .expect(200)
       .expect((res) => {
-        expect(res.body.status).toBe('ok');
+        expect(['ok', 'degraded']).toContain(res.body.status);
+        expect(res.body.checks.database).toBeDefined();
       });
   });
 

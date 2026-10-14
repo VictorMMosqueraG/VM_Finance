@@ -1,6 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import type { HealthResponse } from '@vm-finance/shared';
 import { App } from './app';
 
 describe('App', () => {
@@ -27,9 +28,9 @@ describe('App', () => {
       status: 'ok',
       service: 'vm-finance-api',
       version: '0.1.0',
-      database: 'not-configured',
       timestamp: new Date().toISOString(),
-    });
+      checks: { database: { status: 'not-configured', durationMs: 0 } },
+    } satisfies HealthResponse);
     await fixture.whenStable();
     fixture.detectChanges();
     const status = (fixture.nativeElement as HTMLElement).querySelector(

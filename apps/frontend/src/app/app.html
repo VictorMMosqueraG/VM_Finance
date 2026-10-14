@@ -10,7 +10,7 @@
     @if (state.kind === 'ok') {
       <p class="font-semibold text-ios-green" data-testid="api-status">● API conectada</p>
       <p class="text-sm text-neutral-500">
-        Base de datos: <span class="font-medium">{{ state.data.database }}</span> · v{{
+        Base de datos: <span class="font-medium">{{ state.data.checks['database']?.status ?? '—' }}</span> · v{{
           state.data.version
         }}
       </p>
