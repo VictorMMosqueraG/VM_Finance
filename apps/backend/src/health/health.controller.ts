@@ -1,25 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
 import type { HealthResponse } from '@vm-finance/shared';
-import { PrismaService } from '../prisma/prisma.service.js';
+import { HEALTH_SERVICE, type IHealthService } from './health.service.interface.js';
 
 @Controller('health')
 export class HealthController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(@Inject(HEALTH_SERVICE) private readonly health: IHealthService) {}
 
   @Get()
-  async check(): Promise<HealthResponse> {
-    const database = !this.prisma.isConfigured
-      ? 'not-configured'
-      : (await this.prisma.isHealthy())
-        ? 'up'
-        : 'down';
-
-    return {
-      status: 'ok',
-      service: 'vm-finance-api',
-      version: process.env.npm_package_version ?? '0.1.0',
-      database,
-      timestamp: new Date().toISOString(),
-    };
+  check(): Promise<HealthResponse> {
+    return this.health.check();
   }
 }

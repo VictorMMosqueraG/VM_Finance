@@ -1,10 +1,9 @@
-import { TransactionType } from './enums.js';
+import { TransactionType } from './enums/index.js';
 import { percentOf, sumCop, type Cop } from './money.js';
 
 export interface IncomeSourceInput {
   name: string;
   amount: Cop;
-  /** Porcentaje (0–100) que va directo al ahorro del mes. */
   savingsPercent: number;
 }
 
@@ -15,19 +14,14 @@ export interface TransactionInput {
 
 export interface MonthlyKpis {
   totalIncome: Cop;
-  /** Parte de los ingresos que se separa al ahorro según cada fuente. */
   savingsFromIncome: Cop;
-  /** Ahorro bruto = ahorro de ingresos + abonos extra (ADD_SAVINGS). */
   grossSavings: Cop;
   fromSavingsExpenses: Cop;
-  /** 💰 Ahorro neto disponible = ahorro bruto − gastos FROM_SAVINGS. */
   netSavings: Cop;
-  /** Ingresos que quedan para cubrir obligaciones y gastos del mes. */
   spendableIncome: Cop;
   fixedExpenses: Cop;
   variableExpenses: Cop;
   extraIncome: Cop;
-  /** 🟢 Disponible para gastar = ingresos gastables − fijos − varios + ingresos extra. */
   available: Cop;
 }
 
@@ -35,10 +29,6 @@ function totalOf(transactions: readonly TransactionInput[], type: TransactionTyp
   return sumCop(transactions.filter((t) => t.type === type).map((t) => t.amount));
 }
 
-/**
- * Reglas financieras del mes. Se comparten entre backend (dashboard) y
- * frontend (KPIs en vivo del formulario) para que ambos calculen igual.
- */
 export function calculateMonthlyKpis(
   incomes: readonly IncomeSourceInput[],
   transactions: readonly TransactionInput[],

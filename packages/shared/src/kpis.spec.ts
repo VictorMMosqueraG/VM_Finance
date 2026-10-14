@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { TransactionType } from './enums.js';
+import { TransactionType } from './enums/index.js';
 import { calculateMonthlyKpis, type TransactionInput } from './kpis.js';
 import { formatCop, percentOf } from './money.js';
 
