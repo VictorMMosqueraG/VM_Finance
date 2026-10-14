@@ -1,0 +1,18 @@
+
+# tipo(módulo): descripción en minúscula, imperativo, sin punto final
+#
+# Tipos: feat | fix | docs | refactor | test | chore | ci | build | perf | style | revert
+#
+# Correcto:
+#   feat(movimientos): registrar gasto con categoría
+#   fix(kpis): corregir el ahorro neto cuando no hay ingresos
+#   ci(pipeline): agregar despliegue a Render
+#   docs(readme): documentar cómo correr el proyecto
+#
+# Incorrecto:
+#   ajustes solicitados        -> no dice ni el tipo ni dónde
+#   feature(pagos): ...        -> "feature" nombra la rama; el commit usa "feat"
+#   fix: corregir saldo        -> falta el módulo entre paréntesis
+#   arreglo bug                -> obliga a abrir el diff para saber qué cambió
+#
+# Cuerpo opcional (después de una línea en blanco): el porqué del cambio.

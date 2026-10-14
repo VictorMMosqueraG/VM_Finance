@@ -24,7 +24,8 @@
     "db:down": "docker compose down",
     "db:generate": "npm run prisma:generate -w @vm-finance/backend",
     "db:migrate": "npm run prisma:migrate -w @vm-finance/backend",
-    "db:studio": "npm run prisma:studio -w @vm-finance/backend"
+    "db:studio": "npm run prisma:studio -w @vm-finance/backend",
+    "prepare": "git config core.hooksPath .githooks && git config commit.template .gitmessage || true"
   },
   "devDependencies": {
     "concurrently": "^10.0.6",

@@ -1,0 +1,6 @@
+#!/bin/sh
+if ! command -v node >/dev/null 2>&1; then
+  echo "✖ No se encontró Node.js en el PATH; no se puede validar el mensaje del commit." >&2
+  exit 1
+fi
+exec node "$(dirname "$0")/commit-msg.mjs" "$@"
